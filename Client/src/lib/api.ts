@@ -6,7 +6,3 @@ export const api = axios.create({
   headers: { "Content-Type": "application/json" },
   timeout: 15000,
 });
-
-export function configuredPath(value: string | undefined): string | null {
-  return value?.trim() || null;
-}

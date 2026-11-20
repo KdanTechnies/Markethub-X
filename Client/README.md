@@ -1,31 +1,111 @@
-# Commonplace Marketplace frontend
+# Commonplace Marketplace — frontend
 
-A responsive, frontend-only peer-to-peer marketplace built with Next.js App Router, TypeScript, Tailwind CSS, TanStack Query, Axios, React Hook Form, Zod, Zustand, Lucide, and Sonner. Page layouts use Tailwind utility classes. `src/app/globals.css` contains the Tailwind import, theme tokens, and small global resets. Buyers and sellers arrange a physical meetup and handle payment directly; this app includes no payment processing.
+## 1. Project overview
 
-## Run locally
+This is a frontend-only Next.js project for a peer-to-peer marketplace. It is located in the `Client/` directory of the cloned `Markethub-X` repository. The current codebase is an initial UI and integration foundation, not the complete marketplace described in the product brief.
 
-1. Install Node.js 20 or newer.
-2. Run `npm install`.
-3. Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_API_BASE_URL`.
-4. Start with `npm run dev` and visit `http://localhost:3000`.
+Buyers and sellers connect directly, arrange an in-person meetup, inspect the item, and handle payment between themselves. The app contains no payment processing, wallet, or escrow functionality.
 
-Run `npm run format` to format supported files with Prettier, or `npm run format:check` to check formatting.
+Current UI: responsive Tailwind homepage, marketplace page shell, listing detail shell, login and registration information pages, and about/contact pages. Listing and search areas explain that API data is not connected. Account, marketplace management, communication, meetup, verification, notification, review, and administrative workflows are not implemented yet.
 
-## Backend contract is required
+## 2. Technologies used
 
-No OpenAPI/Swagger file or backend contract was provided with the build prompt. To avoid inventing routes, request payloads, enum values, authentication behavior, or upload flows, only the API client foundation and listing query hook are included. The home page deliberately shows an integration state until `NEXT_PUBLIC_LISTINGS_PATH` is populated from the actual contract. The current hook expects a response that is either a list of listings or `{ items: Listing[], total?: number }`; confirm and adapt it to the documented backend response before setting that path. Authentication uses Axios `withCredentials`; tokens are never stored in browser storage.
+- **Next.js App Router** renders the site and route pages.
+- **TypeScript** is configured in strict mode; page files use `.tsx` for typed React components.
+- **Tailwind CSS 4** supplies the page layout and responsive utility styles. Global CSS is limited to the Tailwind import, theme tokens, and base styles.
+- **Axios** is configured centrally in `src/lib/api.ts` with cookie credentials enabled.
+- **TanStack Query** is installed and its provider is mounted. No API query or mutation hooks are active until the backend contract is available.
+- **React Hook Form, Zod, Zustand, Lucide React, and Sonner** are installed for the planned application. Form validation, shared client state, and complete notification flows have not been implemented yet.
 
-Do not present this scaffold as fully integrated. The following areas need the actual contract before they can be wired safely: auth/session and profile, categories, listing details and management, image uploads, favorites, messaging, meetups, reviews, notifications, verification, and admin permissions/actions.
-
-## Structure
+## 3. Project structure
 
 ```text
-src/app/       App Router pages, metadata, global styles, providers
-src/lib/       Shared Axios client and API configuration helpers
-src/hooks/     TanStack Query hooks
-src/types/     Reusable API/domain types
+Markethub-X/
+└── Client/
+    ├── src/
+    │   ├── app/                        # App Router pages, metadata, and Tailwind entry
+    │   │   ├── about/page.tsx
+    │   │   ├── contact/page.tsx
+    │   │   ├── listings/[id]/page.tsx   # Listing details integration pending
+    │   │   ├── login/page.tsx           # Auth contract pending
+    │   │   ├── marketplace/page.tsx     # Listing API integration pending
+    │   │   ├── register/page.tsx        # Auth contract pending
+    │   │   ├── layout.tsx
+    │   │   ├── page.tsx
+    │   │   ├── providers.tsx
+    │   │   └── globals.css
+    │   ├── components/site.tsx          # Shared header, footer, notice, and links
+    │   ├── lib/api.ts                   # Central Axios client
+    │   └── types/styles.d.ts            # TypeScript declaration for CSS imports
+    ├── .env.example
+    ├── .gitignore
+    ├── package.json
+    ├── package-lock.json
+    ├── postcss.config.mjs
+    ├── next.config.ts
+    └── tsconfig.json
 ```
 
-## Configuration and deployment
+Directories for services, schemas, stores, and feature-specific hooks will be added when those integrations are implemented; they are not represented as existing code today.
 
-Set only public API origin and confirmed endpoint paths in `.env.local`; never put secrets in `NEXT_PUBLIC_` variables. Run `npm run build` for a production build, then deploy to a Next.js-compatible host with the production API origin and cookie/CORS settings configured by the backend team. The frontend cannot grant authorization: every protected action must also be enforced by the backend.
+## 4. Installation instructions
+
+Use Node.js 20 or newer. From the cloned repository root, enter the client folder and install from the lockfile:
+
+```bash
+cd Client
+npm ci
+cp .env.example .env.local
+```
+
+On Windows PowerShell, use `Copy-Item .env.example .env.local` instead of `cp`. Set the local API origin in `.env.local` if your backend uses a different origin.
+
+## 5. Environment configuration
+
+`.env.example` contains the local API origin from the product brief:
+
+```dotenv
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8000/api/v1
+```
+
+No endpoint path variables are defined because the backend OpenAPI/Swagger contract has not been provided. Do not add endpoint paths, query parameter names, request fields, or enum values until they are confirmed in that contract. Never put private credentials or secrets in a `NEXT_PUBLIC_` variable. `.env.local` is ignored by Git; `.env.example` is intentionally kept in Git.
+
+## 6. Development commands
+
+Run these from `Client/`:
+
+```bash
+npm run dev       # Start the local development server
+npm run build     # Create a production build
+npm run start     # Serve the production build
+npm run lint      # Runs the configured Next.js lint command
+```
+
+There is no test script or test suite in the current project. Prettier formatting is available through the VS Code extension; no project-level Prettier config or CLI dependency is required.
+
+## 7. API integration instructions
+
+The backend API contract is the authority for frontend integration. No OpenAPI/Swagger document or backend source was supplied, so the current pages do not send listing, authentication, upload, messaging, meetup, or administrative requests. They do not display fabricated live listings.
+
+When the contract is available:
+
+1. Confirm the development API origin and cookie/CORS requirements.
+2. Add reusable request and response types that match the documented field names and enum values.
+3. Add service functions through the centralized Axios client using only documented methods, paths, payloads, and response shapes.
+4. Add TanStack Query hooks for server state and invalidate relevant query keys after successful mutations.
+5. Connect each page and form to those hooks, and implement API-backed loading, empty, and error states.
+6. If a requested workflow has no backend endpoint, document that specific missing integration rather than simulating success.
+
+Authentication must use the backend’s supported secure HTTP-only cookie flow. Do not store tokens in browser storage. Backend authorization must protect all restricted actions; frontend route visibility is not authorization.
+
+## 8. Build and deployment
+
+From `Client/`, install reproducibly and build:
+
+```bash
+npm ci
+npm run build
+npm run start
+```
+
+Deploy the Next.js app from the `Client/` directory to a Next.js-compatible host. Set `NEXT_PUBLIC_API_BASE_URL` to the production API origin at build/deployment time. The backend team must configure HTTPS, allowed origins, and secure cookie settings for the deployed frontend. No production secrets belong in frontend environment variables. Verify the real API integration and backend authorization before treating the marketplace workflows as production-ready.
