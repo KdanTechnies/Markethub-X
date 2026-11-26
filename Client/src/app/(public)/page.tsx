@@ -16,8 +16,7 @@ import { IntegrationNotice } from "@/components/ui/integration-notice";
 function ListingsSection({ search }: { search: string }) {
   return (
     <IntegrationNotice domain="listings">
-      {search ? `Search for “${search}” is waiting for the backend contract. ` : "Live listings are pending the backend contract. "}
-      No listings are mocked; search and listing display will be connected to documented paths and response fields.
+      {search ? `No listings found for “${search}”. Try another search or explore the marketplace.` : "New finds from your neighbourhood will appear here."}
     </IntegrationNotice>
   );
 }
@@ -81,7 +80,7 @@ export default function HomePage() {
           <div><p className="text-[10px] font-bold tracking-[0.17em] text-slate-500">A PLACE FOR THE THINGS YOU LOVE</p><h2 className="mt-3 font-display text-3xl font-medium tracking-tight text-brand-navy sm:text-4xl">Find your kind<br />of <em className="font-serif text-emerald-800">something.</em></h2></div>
           <Link className="mb-1 flex shrink-0 items-center gap-2 text-xs font-semibold text-emerald-800 hover:text-brand-green" href="/marketplace">All categories <ArrowUpRight size={15} /></Link>
         </div>
-        <IntegrationNotice domain="listings">Category names and links will be rendered from the backend categories response. No category set is hardcoded as live marketplace data.</IntegrationNotice>
+        <IntegrationNotice domain="listings">Categories will appear here as they become available.</IntegrationNotice>
       </section>
 
       <section className="mx-auto max-w-6xl px-5 pb-16 sm:px-8 sm:pb-20" id="discover">

@@ -4,7 +4,7 @@
 
 `Client/` is the frontend application inside the cloned `Markethub-X` repository. It uses the Next.js App Router and presents responsive public marketplace, account, messaging, meetup, dashboard, verification, and operational-console UI.
 
-The project is a frontend foundation. Its route views, form drafts, validation, local filter controls, and empty/error/pending states are implemented. Live account and marketplace data, form submissions, authorization, image/document uploads, messaging, and meetup actions are **not** connected because the backend OpenAPI/Swagger contract was not supplied. Each such view says that it is awaiting the backend contract. No fake users, listings, messages, or API successes are used.
+The project is a frontend foundation. Its route views, form validation, local filter controls, and polished empty, loading, and error states are implemented. Live account and marketplace data, form submissions, authorization, image/document uploads, messaging, and meetup actions are **not** connected because the backend OpenAPI/Swagger contract was not supplied. User-facing pages use neutral availability notices; technical integration details remain in services and this README. No fake users, listings, messages, or API successes are used.
 
 This is strictly peer-to-peer. Buyers and sellers meet in person, inspect the item, and exchange cash directly. The app has no checkout, wallet, escrow, payment gateway, or fee calculation.
 

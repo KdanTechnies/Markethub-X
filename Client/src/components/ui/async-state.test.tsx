@@ -15,14 +15,15 @@ describe("API and access states", () => {
     expect(screen.getByRole("alert")).toHaveTextContent("Service unavailable");
   });
 
-  it("clearly marks an unconfirmed integration", () => {
+  it("shows a friendly availability notice without technical integration details", () => {
     render(<IntegrationNotice domain="listings" />);
-    expect(screen.getByRole("status")).toHaveTextContent("Awaiting backend endpoint contract");
+    expect(screen.getByRole("status")).toHaveTextContent("Coming soon");
+    expect(screen.getByRole("status")).not.toHaveTextContent(/backend|endpoint|contract/i);
   });
 
   it("shows an unauthenticated state without claiming to authorize the route", () => {
     render(<SessionBoundary state="unauthenticated" />);
     expect(screen.getByRole("link", { name: "Go to login" })).toHaveAttribute("href", "/login");
-    expect(screen.getByRole("status")).toHaveTextContent("backend must enforce");
+    expect(screen.getByRole("status")).toHaveTextContent("Sign in to view your account");
   });
 });

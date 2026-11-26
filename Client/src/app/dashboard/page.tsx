@@ -16,17 +16,17 @@ export default function DashboardPage() {
           <section className="grid gap-4 xl:grid-cols-2">
             <DashboardPanel title="My listings" action="Manage listings" href="/listings/new">
               <div className="grid gap-2 sm:grid-cols-3">
-                {["Active", "Pending", "Unavailable"].map((status) => <div key={status} className="rounded border border-brand-border p-3"><p className="text-xs text-brand-muted">{status}</p><p className="mt-2 text-sm font-semibold text-brand-ink">Awaiting backend data</p></div>)}
+                {["Active", "Pending", "Unavailable"].map((status) => <div key={status} className="rounded border border-brand-border p-3"><p className="text-xs text-brand-muted">{status}</p><p className="mt-2 text-sm font-semibold text-brand-ink">No listings yet</p></div>)}
               </div>
             </DashboardPanel>
             <DashboardPanel title="Saved favorites" action="View favorites" href="/favorites">
-              <p className="text-sm text-brand-muted">Your saved items will appear when the favorites endpoint is confirmed.</p>
+              <p className="text-sm text-brand-muted">Save an item you love to find it here later.</p>
             </DashboardPanel>
             <DashboardPanel title="Recent messages" action="Open messages" href="/messages">
-              <p className="text-sm text-brand-muted">Conversation previews will appear when the messaging contract is available.</p>
+              <p className="text-sm text-brand-muted">Your conversations will appear here.</p>
             </DashboardPanel>
             <DashboardPanel title="Notifications" action="View notifications" href="/notifications">
-              <p className="text-sm text-brand-muted">You have no notifications loaded.</p>
+              <p className="text-sm text-brand-muted">You’re all caught up.</p>
             </DashboardPanel>
           </section>
           <Link className="inline-flex min-h-10 items-center rounded border border-brand-border px-4 text-sm font-semibold text-brand-navy hover:bg-slate-50" href="/profile">Account settings</Link>

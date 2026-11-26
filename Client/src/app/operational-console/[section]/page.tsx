@@ -20,5 +20,5 @@ export default async function OperationalConsoleSectionPage({ params }: { params
   const { section } = await params;
   const title = sectionTitles[section];
   if (!title) notFound();
-  return <><PageHeading eyebrow="ADMINISTRATION" title={title} description="Search, review, and act only with permissions confirmed by the backend." /><AdminDataState subject={title.toLowerCase()} /></>;
+  return <><PageHeading eyebrow="ADMINISTRATION" title={title} description={`Review ${title.toLowerCase()} and keep the marketplace running smoothly.`} /><AdminDataState subject={title.toLowerCase()} /></>;
 }

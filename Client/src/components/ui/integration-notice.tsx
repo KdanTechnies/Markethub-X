@@ -4,7 +4,7 @@ import type { BackendDomain } from "@/constants/integrations";
 
 export function IntegrationNotice({
   domain,
-  children = "This view is ready for integration and is awaiting the backend endpoint contract.",
+  children = "This part of Commonplace will be available soon.",
 }: {
   domain: BackendDomain | "general";
   children?: ReactNode;
@@ -13,13 +13,13 @@ export function IntegrationNotice({
     <section
       role="status"
       data-testid="integration-notice"
-      className="flex gap-3 rounded-md border border-amber-200 bg-amber-50 p-4 text-amber-950"
+      data-domain={domain}
+      className="flex gap-3 rounded-md border border-brand-border bg-white p-4 text-brand-ink"
     >
-      <Info aria-hidden="true" className="mt-0.5 shrink-0 text-amber-700" size={18} />
+      <Info aria-hidden="true" className="mt-0.5 shrink-0 text-brand-green" size={18} />
       <div>
-        <h2 className="text-sm font-semibold">Awaiting backend endpoint contract</h2>
-        <p className="mt-1 text-xs leading-5 text-amber-900/80">{children}</p>
-        <p className="mt-2 text-[10px] font-semibold uppercase tracking-wider text-amber-800">{domain}</p>
+        <h2 className="text-sm font-semibold">Coming soon</h2>
+        <p className="mt-1 text-xs leading-5 text-brand-muted">{children}</p>
       </div>
     </section>
   );

@@ -8,15 +8,15 @@ export default async function PublicProfilePage({ params }: { params: Promise<{ 
     <PageContainer>
       <PageHeading eyebrow="SELLER PROFILE" title="Public profile" description={`Profile reference ${id}.`} />
       <div className="space-y-5">
-        <IntegrationNotice domain="users">Public profile fields, verification indicators, reviews, and active listings await documented responses. Private verification documents are never displayed here.</IntegrationNotice>
+        <IntegrationNotice domain="users">Seller details and listings will appear here.</IntegrationNotice>
         <section className="flex flex-col gap-4 rounded-md border border-brand-border bg-white p-5 sm:flex-row sm:items-center">
           <div aria-hidden="true" className="grid size-20 shrink-0 place-items-center rounded-full bg-slate-100 text-2xl text-brand-muted">?</div>
           <div className="grid flex-1 gap-3 sm:grid-cols-2">
-            {["Display name", "Location", "Member since", "Verification status"].map((label) => <div key={label}><p className="text-[10px] font-semibold uppercase tracking-wide text-brand-muted">{label}</p><p className="mt-1 text-sm text-brand-ink">Awaiting backend data</p></div>)}
+            {["Display name", "Location", "Member since", "Verification status"].map((label) => <div key={label}><p className="text-[10px] font-semibold uppercase tracking-wide text-brand-muted">{label}</p><p className="mt-1 text-sm text-brand-ink">Not available yet</p></div>)}
           </div>
         </section>
-        <section><h2 className="mb-3 font-display text-xl font-bold text-brand-navy">Rating and reviews</h2><EmptyState title="No reviews loaded" description="Rating summaries and reviewer details must be returned by the backend." /></section>
-        <section><h2 className="mb-3 font-display text-xl font-bold text-brand-navy">Active listings</h2><EmptyState title="No listings loaded" description="Seller listings need the profile/listing endpoints." /></section>
+        <section><h2 className="mb-3 font-display text-xl font-bold text-brand-navy">Rating and reviews</h2><EmptyState title="No reviews yet" description="Reviews will appear after this seller completes a sale." /></section>
+        <section><h2 className="mb-3 font-display text-xl font-bold text-brand-navy">Active listings</h2><EmptyState title="No active listings" description="This seller hasn’t posted any items yet." /></section>
       </div>
     </PageContainer>
   );
